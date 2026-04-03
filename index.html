@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taska — Task Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Cabinet+Grotesk:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+   <!-- FAVICON -->
+    <link rel="icon" href="public/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="public/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="public/favicon-16x16.png" />
+    <link rel="apple-touch-icon" href="public/apple-touch-icon.png" />
+
+    <meta
+      name="description"
+      content="Taska is a pastel-themed productivity app with task management and focus timer to help you stay organized and mindful." />
+    <meta name="author" content="Iqra Mahfooz" />
+
+    <!-- Google Fonts (Professional way instead of CSS @import)
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"> -->
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Taska — Task Manager" />
+    <meta
+      property="og:description"
+      content="Organize tasks, track focus sessions, and boost productivity with Taska."
+    />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+</head>
+<body>
+  <div class="app" id="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect x="2" y="2" width="7" height="7" rx="2" fill="currentColor"/>
+              <rect x="11" y="2" width="7" height="7" rx="2" fill="currentColor" opacity="0.5"/>
+              <rect x="2" y="11" width="7" height="7" rx="2" fill="currentColor" opacity="0.5"/>
+              <rect x="11" y="11" width="7" height="7" rx="2" fill="currentColor"/>
+            </svg>
+          </div>
+          <span class="logo-text">Taska</span>
+        </div>
+        <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M2 4h12M2 8h8M2 12h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">Views</div>
+        <button class="nav-item active" data-view="all">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="1" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/><rect x="1" y="9" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="9" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/></svg>
+          <span>All Tasks</span>
+          <span class="nav-count" id="count-all">0</span>
+        </button>
+        <button class="nav-item" data-view="today">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 1v2M11 1v2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M2 6h12" stroke="currentColor" stroke-width="1.3"/></svg>
+          <span>Today</span>
+          <span class="nav-count" id="count-today">0</span>
+        </button>
+        <button class="nav-item" data-view="active">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v3.5l2 1.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Active</span>
+          <span class="nav-count" id="count-active">0</span>
+        </button>
+        <button class="nav-item" data-view="completed">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M5.5 8l2 2 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Completed</span>
+          <span class="nav-count" id="count-completed">0</span>
+        </button>
+
+        <div class="nav-section-label" style="margin-top:1.5rem">Priority</div>
+        <button class="nav-item" data-view="priority-critical">
+          <span class="prio-dot critical"></span>
+          <span>Critical</span>
+          <span class="nav-count" id="count-critical">0</span>
+        </button>
+        <button class="nav-item" data-view="priority-high">
+          <span class="prio-dot high"></span>
+          <span>High</span>
+          <span class="nav-count" id="count-high">0</span>
+        </button>
+        <button class="nav-item" data-view="priority-medium">
+          <span class="prio-dot medium"></span>
+          <span>Medium</span>
+          <span class="nav-count" id="count-medium">0</span>
+        </button>
+        <button class="nav-item" data-view="priority-low">
+          <span class="prio-dot low"></span>
+          <span>Low</span>
+          <span class="nav-count" id="count-low">0</span>
+        </button>
+
+        <div class="nav-section-label" style="margin-top:1.5rem">Tags</div>
+        <div id="tag-list" class="tag-list"></div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="progress-ring-wrap">
+          <svg class="progress-ring" width="48" height="48" viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="18" stroke-width="3" class="ring-bg"/>
+            <circle cx="24" cy="24" r="18" stroke-width="3" class="ring-fill" id="ring-fill" stroke-dasharray="113" stroke-dashoffset="113"/>
+          </svg>
+          <span class="ring-pct" id="ring-pct">0%</span>
+        </div>
+        <div class="footer-text">
+          <div class="footer-title" id="footer-progress-text">Getting started</div>
+          <div class="footer-sub" id="footer-tasks-left">0 tasks remaining</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main" id="main">
+
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <h1 class="view-title" id="view-title">All Tasks</h1>
+          <span class="view-subtitle" id="view-subtitle">Drag to reorder • Click to edit</span>
+        </div>
+        <div class="topbar-right">
+          <div class="search-wrap">
+            <svg class="search-icon" width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.3"/><path d="M9.5 9.5l2.5 2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <input class="search-input" id="search-input" placeholder="Search tasks…" type="text" />
+            <kbd class="search-kbd">⌘K</kbd>
+          </div>
+          <button class="icon-btn" id="theme-btn" title="Toggle theme">
+            <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.05 3.05l1.06 1.06M11.89 11.89l1.06 1.06M3.05 12.95l1.06-1.06M11.89 4.11l1.06-1.06" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 9A6 6 0 016.5 2a6 6 0 100 12 6 6 0 007-5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="btn-primary" id="new-task-btn">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            New Task
+          </button>
+        </div>
+      </header>
+
+      <!-- Sort + Filter Bar -->
+      <div class="toolbar">
+        <div class="sort-group">
+          <span class="toolbar-label">Sort</span>
+          <div class="seg-control" id="sort-control">
+            <button class="seg-btn active" data-sort="manual">Manual</button>
+            <button class="seg-btn" data-sort="priority">Priority</button>
+            <button class="seg-btn" data-sort="due">Due date</button>
+            <button class="seg-btn" data-sort="alpha">A–Z</button>
+            <button class="seg-btn" data-sort="created">Created</button>
+          </div>
+        </div>
+        <div class="toolbar-right">
+          <button class="ghost-btn" id="clear-completed-btn">Clear completed</button>
+          <button class="icon-btn" id="layout-btn" title="Toggle layout">
+            <svg id="layout-icon-list" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <svg id="layout-icon-grid" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:none"><rect x="1" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="1" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats Strip -->
+      <div class="stats-strip" id="stats-strip">
+        <div class="stat-pill">
+          <span class="stat-n" id="s-total">0</span>
+          <span class="stat-l">Total</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-pill">
+          <span class="stat-n accent" id="s-done">0</span>
+          <span class="stat-l">Done</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-pill">
+          <span class="stat-n warn" id="s-left">0</span>
+          <span class="stat-l">Remaining</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-pill">
+          <span class="stat-n danger" id="s-critical">0</span>
+          <span class="stat-l">Critical</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="progress-strip-wrap">
+          <div class="progress-strip-bar">
+            <div class="progress-strip-fill" id="progress-strip-fill"></div>
+          </div>
+          <span class="stat-l" id="progress-pct-label">0% complete</span>
+        </div>
+      </div>
+
+      <!-- Task List -->
+      <div class="task-board" id="task-board">
+        <ul class="task-list" id="task-list"></ul>
+        <div class="empty-state" id="empty-state">
+          <div class="empty-art">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <rect x="8" y="12" width="48" height="44" rx="6" stroke="currentColor" stroke-width="2" opacity="0.15"/>
+              <path d="M20 26h24M20 34h18M20 42h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.2"/>
+              <circle cx="48" cy="46" r="10" fill="currentColor" opacity="0.08"/>
+              <path d="M44 46l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+            </svg>
+          </div>
+          <p class="empty-title" id="empty-title">No tasks yet</p>
+          <p class="empty-sub" id="empty-sub">Click "New Task" or press N to add one</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Task Modal / Drawer -->
+    <div class="modal-overlay" id="modal-overlay">
+      <div class="modal" id="modal" role="dialog" aria-modal="true">
+        <div class="modal-header">
+          <h2 class="modal-title" id="modal-title">New Task</h2>
+          <button class="modal-close" id="modal-close" aria-label="Close">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="field-group">
+            <label class="field-label">Task title <span class="required">*</span></label>
+            <input class="field-input large" id="modal-task-title" placeholder="What needs to be done?" maxlength="200" />
+          </div>
+          <div class="field-group">
+            <label class="field-label">Description</label>
+            <textarea class="field-textarea" id="modal-task-desc" placeholder="Add more details…" rows="3"></textarea>
+          </div>
+          <div class="field-row">
+            <div class="field-group" style="flex:1">
+              <label class="field-label">Priority</label>
+              <div class="custom-select-wrap">
+                <select class="field-select" id="modal-priority">
+                  <option value="critical">🔥 Critical</option>
+                  <option value="high">🔴 High</option>
+                  <option value="medium" selected>🟡 Medium</option>
+                  <option value="low">🟢 Low</option>
+                </select>
+              </div>
+            </div>
+            <div class="field-group" style="flex:1">
+              <label class="field-label">Due date</label>
+              <input class="field-input" id="modal-due" type="date" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Tags <span class="field-hint">(comma separated)</span></label>
+            <input class="field-input" id="modal-tags" placeholder="design, frontend, bug…" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-ghost" id="modal-cancel">Cancel</button>
+          <button class="btn-primary" id="modal-save">Save Task</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Context Menu -->
+    <div class="context-menu" id="context-menu">
+      <button class="ctx-item" data-action="edit">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9.5 2.5l2 2L4 12H2v-2l7.5-7.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        Edit task
+      </button>
+      <button class="ctx-item" data-action="toggle">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M4.5 7l2 2 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Mark complete
+      </button>
+      <button class="ctx-item" data-action="duplicate">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="3" y="3" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 3V2.5A1.5 1.5 0 016.5 1h5A1.5 1.5 0 0113 2.5v5A1.5 1.5 0 0111.5 9H11" stroke="currentColor" stroke-width="1.3"/></svg>
+        Duplicate
+      </button>
+      <div class="ctx-divider"></div>
+      <button class="ctx-item danger" data-action="delete">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4h10M5 4V2.5h4V4M5.5 6.5v4M8.5 6.5v4M3.5 4l.5 7.5h6L11 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Delete
+      </button>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast-stack" id="toast-stack"></div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
