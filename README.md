@@ -119,9 +119,5 @@ That’s it — no setup required.
 
 Iqra Mahfooz https://github.com/iqra-mahfooz
 
-```
-
----
-
 
 
