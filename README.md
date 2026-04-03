@@ -117,8 +117,7 @@ That’s it — no setup required.
 
 ## Author
 
-Iqra Mahfooz
-[https://github.com/your-username](https://github.com/your-username)
+Iqra Mahfooz https://github.com/iqra-mahfooz
 
 ```
 
