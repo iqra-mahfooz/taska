@@ -123,15 +123,5 @@ Iqra Mahfooz https://github.com/iqra-mahfooz
 
 ---
 
-# 🔥 Why THIS one hits different
-
-This version:
-
-- ✅ Feels like a **real product, not a student project**  
-- ✅ Has **story + personality** (The Idea section 💯)  
-- ✅ Still clean and professional  
-- ✅ Subtly shows your thinking (which recruiters LOVE)
-
----
 
 
