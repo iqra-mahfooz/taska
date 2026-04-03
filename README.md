@@ -31,7 +31,7 @@ It’s not just about managing tasks — it’s about making the process feel ef
 - Switch between different views (all, active, completed, etc.)  
 - Track overall progress visually  
 - Toggle between light and dark modes  
-- Keep data محفوظ (persisted) in the browser using LocalStorage  
+- Keep data safe (persisted) in the browser using LocalStorage  
 
 ---
 
