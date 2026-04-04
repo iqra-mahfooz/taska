@@ -91,16 +91,15 @@ Interactions feel smooth and predictable.
 
 ---
 
-## Running the Project
+## 🚀 Live Demo
 
-Clone the repository:
+🔗 Live Website:
+https://taskaday.netlify.app
 
-```bash
-git clone https://github.com/iqra-mahfooz/taska.git
-cd taska
-````
+🔗 GitHub Repository:
+ https://iqra-mahfooz.github.io/taska/
 
-Open `index.html` in your browser.
+
 
 That’s it — no setup required.
 
